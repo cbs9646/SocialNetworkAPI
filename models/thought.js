@@ -35,8 +35,6 @@ thoughtModelSchema
             return this.reactions.length;
         });
 
-const Thoughts = model("Thought", thoughtModelSchema)
+const Thought = model("Thought", thoughtModelSchema)
 
-module.exports = Thoughts;
-
-//Thoughts or Thought?
+module.exports = Thought;
