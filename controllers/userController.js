@@ -38,16 +38,44 @@ module.exports = {
 
     },
     
-    UpdateUserWithId(req, res) {
+    updateUserWithId(req, res) {
         User.findOneandUpdate(
             { _id: req.params.userId },
             { $set: req.body },
             { runValidators: true, new: true }
         )
-    }
+        .then((user) =>
+            !user
+            ? res.status(404).json({ message: "User not Found" })
+            :User.findOneandUpdate(
+                { users: req.params.userId },
+                { $pull: { users: req.params.userId } },
+                { new: true }
+            )
+        )
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
 
+    removeUserById(req, res) {
+        User.findOneandRemove({ _id: req.params.userId })
+        .then((user) =>
+            !user
+            ? res.status(404).json({ message: "User not Found"})
+            : User.findOneandUpdate(
+                { users: req.params.userId },
+                { $pull: { users: req.params.userId} },
+                { new: true}
 
+        
+        
+            ))
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
 
-
-
-}
+};
