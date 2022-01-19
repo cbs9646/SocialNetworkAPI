@@ -9,7 +9,7 @@ const {
     newThought,
     updateThoughtWithId,
     deleteThoughtWithId,
-} = require("../controllers/thoughtController");
+} = require("../../controllers/thoughtController");
 
 router.route("/thoughts").get(getAllThoughts).post(newThought);
 
