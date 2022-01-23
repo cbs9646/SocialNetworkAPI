@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const friendRoute = require("./friendRoute");
 
-router.use('/:userId/friends', friendRoute);
+router.use('/ :userId/friends', friendRoute);
 
 const{
     getAllUsers,
