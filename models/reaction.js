@@ -3,14 +3,10 @@ const { Schema, Types } = require('mongoose');
 const reactionModelSchema = new Schema (
 
     {
-        reactionId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
-        },
-        reactionBody: {
+        body: {
             type: String,
             required: true,
-            maxLength: 280,
+            maxlength: 280,
         },
         username: {
             type: String,
