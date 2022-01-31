@@ -1,6 +1,17 @@
-{
+{ 
+  "name": "thesocialspace",
+  "main": "index.js",
+  "license": "MIT",
+  "Scripts": {
+    "start": "node index.js",
+    "seed": "node utils/seed.js"
+  },
   "dependencies": {
+    "env": "^0.0.2",
     "express": "^4.17.2",
     "mongoose": "^6.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
   }
 }
