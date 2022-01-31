@@ -11,22 +11,24 @@ const {
     deleteThoughtWithId,
 } = require("../../controllers/thoughtController");
 
+router.route("/").get(getAllThoughts).post(newThought);
+router.route("/:userId").post(newThought);
+router.route("/:thoughtId").delete(deleteThoughtWithId);
+
 const {
     newReaction,
     deleteReactionUsingId,
-    deleteReaction,
+    
 } = require("../../controllers/reactionController");
 
+router.route("/:thoughtId/reactions").post(newReaction);
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteReactionUsingId);
 
-router.route("/").get(getAllThoughts).post(newThought);
 
 router 
     .route("/:thoughtId")
     .get(getThoughtWithId)
     .delete(deleteThoughtWithId)
     .put(updateThoughtWithId);
-
-router.route("/:thoughtId/reactions").post(newReaction);
-router.route("/:thoughtId/reactions/:reactionId").delete(deleteReactionUsingId);
 
 module.exports = router;

@@ -8,20 +8,16 @@ const{
     removeUserById,
 } = require('../../controllers/userController');
 
+router.route("/").get(getAllUsers).post(createNewUser);
+router.route("/:userId").get(getUsersById).delete(removeUserById);
+router.route("/:userId").get(getUsersById).put(updateUserWithId);
+
 const {
     addNewFriend,
     deleteFriend,
 } = require("../../controllers/friendController");
 
-router.route("/").get(getAllUsers).post(createNewUser);
-
-router
-    .route("/:userId")
-    .get(getUsersById)
-    .delete(removeUserById)
-    .put(updateUserWithId);
-
-router.route("/:userId/friends/:friendId").post(addNewFriend).delete(deleteFriend);
-
+router.route("/:userId/friends/:friendId").delete(deleteFriend);
+router.route("/:friendId").put(addNewFriend);
 
 module.exports = router;

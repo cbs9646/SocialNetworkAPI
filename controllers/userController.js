@@ -3,16 +3,8 @@ const { User } = require("../models");
 module.exports = {
     getAllUsers(req, res) {
         User.find()
-        .then(async (users) => {
-            const userObject = {
-                users,
-            };
-            return res.json(userObject);
-    })
-        .catch((err) => {
-            console.log(err);
-            return res.status(500).json(err);
-        });
+        .then((users) => res.json(users))
+        .catch((err) => res.status(500).json(err));
     },
 
     getUsersById(req, res) {
@@ -47,12 +39,14 @@ module.exports = {
         .then((user) =>
             !user
             ? res.status(404).json({ message: "User not Found" })
-            : res.json(user)
+            :  User.findOneAndUpdate(
+                { users: req.params.userId },
+                { $pull: { users: req.params.userId} },
+                { new: true }
         )
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+        .catch((err) => { res.status(500).json(err);
+        })
+        );
     },
 
     removeUserById(req, res) {
@@ -63,9 +57,9 @@ module.exports = {
             : res.json(user)
             )
             .catch((err) => {
-                console.log(err);
+                
                 res.status(500).json(err);
-            });
+            })
     },
 
-};
+}
