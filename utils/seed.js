@@ -19,7 +19,7 @@ connection.once("open", async () =>{
          try {
     reactions = [
        {
-            body: "API's are no fun"
+            body: "API's are no fun",
             username: "Cstedman",
         },
         ];
